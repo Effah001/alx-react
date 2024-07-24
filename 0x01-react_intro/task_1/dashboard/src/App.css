@@ -50,7 +50,7 @@
   text-align: center;
   position: fixed;
   bottom: 0;
-  font-style: italic;
   width: 100%;
   border-top: 3px solid rgb(247, 72, 72);
+  font-style: italic;
 }
