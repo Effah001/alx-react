@@ -1,0 +1,23 @@
+.Notifications {
+  position: absolute;
+  top: 0;
+  background-color: white;
+  border: 1px dashed #da2e2e;
+  padding: 5px 20px;
+  height: 125px;
+  width: 1150px;
+  text-align: left;
+}
+
+
+.Notifications li[data-priority="default"] {
+  color: blue;
+  font-weight: normal;
+}
+
+
+.Notifications li[data-priority="urgent"] {
+  color: red;
+  font-weight: bold;
+}
+
