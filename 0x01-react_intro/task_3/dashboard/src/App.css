@@ -1,0 +1,72 @@
+.App {
+  text-align: left;
+  background-color: white;
+  min-height: 100vh;
+  margin: 0;
+  margin-top: 130px;
+  overflow: hidden;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color:white;
+  display: flex;
+  text-align: left;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 1px 2px;
+  gap: 20px;
+  border-bottom: 3px solid rgb(247, 72, 72);
+}
+
+.App-header h1 {
+  color: rgb(247, 72, 72);
+  margin-top: 90px;
+  font-size: 1.9rem;
+}
+
+.App-logo {
+  height: 30vmin;
+}
+
+.App-body {
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-body p {
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.App-footer {
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  font-style: italic;
+  width: 100%;
+  margin-top: 400px;
+  border-top: 3px solid rgb(247, 72, 72); 
+}
+
+form {
+  display: flex;
+  flex-direction: row; 
+  gap: 20px; 
+  align-items: center;
+  margin-top: 5px;
+  margin-left: 50px;
+}
+
+button {
+  margin-top: 3px;
+}
