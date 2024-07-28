@@ -18,6 +18,6 @@ describe('Notifications Component', () => {
   });
 
   test('renders the notification text', () => {
-    expect(wrapper.contains(<p>Here is the list of notifications</p>)).toBeTruthy();
+    expect(wrapper.contains(<p>Here is a list of notifications</p>)).toBeTruthy();
   });
 });
