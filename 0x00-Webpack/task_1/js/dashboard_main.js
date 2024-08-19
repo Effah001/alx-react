@@ -6,16 +6,13 @@ let count = 0;
 function updateCounter() {
     count += 1;
     $('#count').text(`${count} clicks on the button`);
-}
+};
 
-$(document).ready(function() {
-    const paragraph1 = $('<p>').text('Holberton Dashboard');
-    const paragraph2 = $('<p>').text('Dashboard data for the students');
-    const button = $('<button>').text('Click here to get started');
-    const countParagraph = $('<p>').attr('id', 'count');
-    const paragraph3 = $('<p>').text('Copyright - Holberton School');
+$('body').append('<p>Holberton Dashboard</p>');
+$('body').append('<p>Dashboard data for the students</p>');
+$('body').append('<button>Click here to get started</button>');
+$('body').append('<p id="count"></p>');
+$('body').append('<p>Copyright - Holberton School</p>');
 
-    $('body').append(paragraph1, paragraph2, button, countParagraph, paragraph3);
 
-    button.on('click', _.debounce(updateCounter, 600));
-});
+button.on('click', _.debounce(updateCounter, 600));
