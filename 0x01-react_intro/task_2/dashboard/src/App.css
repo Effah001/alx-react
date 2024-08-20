@@ -1,3 +1,9 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 
 .App-logo {
   height: 25vmin;
@@ -11,6 +17,7 @@
   align-items: center;
   margin-bottom: 3rem;
   border-bottom: 0.2rem solid rgb(241, 62, 62);
+  margin: 0.4rem;
 }
 
 .App-header h1 {
@@ -19,9 +26,9 @@
 }
 
 .App-body {
-  margin-top: 0;
+  margin-top: 2rem;
   padding-left: 3rem;
-  padding-bottom: 15rem;
+  padding-bottom: 18rem;
 }
 
 form {
@@ -33,12 +40,12 @@ form {
 
 .App-footer {
   border-top: 0.2rem solid rgb(241, 62, 62);
-
   display: flex;
   justify-content: center;
   align-items: center;
   font-style: italic;
   font-weight: bold;
   font-size: 1.2rem;
+  margin: 0.4rem;
 }
 
