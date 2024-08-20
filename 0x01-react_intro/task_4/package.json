@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "gh-pages": "^6.1.1"
+  },
+
+"homepage": "https://effah001.github.io/alx-react/",
+
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+}
+
+}
