@@ -1,0 +1,37 @@
+
+.App-logo {
+  height: 25vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: wjite;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 3rem;
+  border-bottom: 0.2rem solid rgb(241, 62, 62);
+}
+
+.App-header h1 {
+  color: rgb(241, 62, 62);
+  font-weight: bold;
+}
+
+.App-body {
+  margin-top: 0;
+  padding-left: 3rem;
+  padding-bottom: 17rem;
+}
+
+.App-footer {
+  border-top: 0.2rem solid rgb(241, 62, 62);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
