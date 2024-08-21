@@ -1,0 +1,13 @@
+  .Notifications {
+    border: 1px dashed #e61919;  
+    margin: 0.2rem 0.3rem;            
+}
+
+
+.Notifications li[data-priority="default"] {
+    color: rgb(3, 3, 75); 
+}
+
+.Notifications li[data-priority="urgent"] {
+    color: red;   
+}
