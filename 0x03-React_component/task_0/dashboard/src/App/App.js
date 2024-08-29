@@ -6,7 +6,7 @@ import Login from '../Login/Login';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import CourseList from '../CourseList/CourseList';
-import { getLatestNotification } from '../utils/utils';
+import { getLatestNotification } from '../utils';
 
 
 class App extends Component {

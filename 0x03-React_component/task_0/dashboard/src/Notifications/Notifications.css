@@ -1,4 +1,4 @@
-  .Notifications {
+.Notifications {
     border: 1px dashed #e61919;  
     margin: 0.2rem 0.3rem;            
 }
@@ -10,4 +10,10 @@
 
 .Notifications li[data-priority="urgent"] {
     color: red;   
+}
+
+.menuItem {
+    padding: 0.7rem 1rem 0 0;
+    position: absolute;
+    right: 0;
 }
