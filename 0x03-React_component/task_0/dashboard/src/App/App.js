@@ -9,6 +9,7 @@ import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils';
 
 class App extends Component {
+  
   state = {
     listCourses: [
       { id: 1, name: 'ES6', credit: 60 },
