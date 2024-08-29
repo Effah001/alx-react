@@ -7,6 +7,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils';
+import BodySection from '../BodySection/BodySection';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 
 class App extends Component {
   constructor(props) {
@@ -59,10 +61,17 @@ class App extends Component {
           <Header />
           <div className="App-body">
             {isLoggedIn ? (
-              <CourseList listCourses={listCourses} />
+              <BodySectionWithMarginBottom title="Course list">
+                <CourseList listCourses={listCourses} />
+              </BodySectionWithMarginBottom>
             ) : (
-              <Login />
+              <BodySectionWithMarginBottom title="Log in to continue">
+                <Login />
+              </BodySectionWithMarginBottom>
             )}
+            <BodySection title="News from the School">
+              <p>Here is some random news from the school. Stay tuned for more updates!</p>
+            </BodySection>
           </div>
           <Footer />
         </div>
