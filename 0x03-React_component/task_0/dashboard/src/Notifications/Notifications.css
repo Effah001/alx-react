@@ -4,16 +4,24 @@
 }
 
 
-.Notifications li[data-priority="default"] {
-    color: rgb(3, 3, 75); 
+li[data-notification-type='default'] {
+    color: blue;
 }
 
-.Notifications li[data-priority="urgent"] {
-    color: red;   
+li[data-notification-type='urgent'] {
+    color: red;
 }
 
 .menuItem {
     padding: 0.7rem 1rem 0 0;
     position: absolute;
     right: 0;
+}
+
+
+.Notifications {
+    display: flex;
+    text-align:justify;
+    justify-content: right;
+    padding-bottom: 0.2rem;   
 }

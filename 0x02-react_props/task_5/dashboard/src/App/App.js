@@ -38,4 +38,12 @@ function App() {
   );
 }
 
+App.propTypes = {
+  isLoggedIn: PropTypes.bool,
+}
+
+App.defaultProps = {
+  isLoggedIn: false,
+}
+
 export default App;
