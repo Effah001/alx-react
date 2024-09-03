@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
-  const rowStyle = {
-    backgroundColor: isHeader ? '#deb5b545' : '#f5f5f5ab'
-  };
-
+function CourseListRow({ isHeader = false, textFirstCell, textSecondCell = null, style = {} }) {
   return (
-    <tr style={rowStyle}>
+    <tr style={style}>
       {isHeader ? (
         textSecondCell ? (
           <>
@@ -18,24 +14,24 @@ const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
           <th colSpan="2">{textFirstCell}</th>
         )
       ) : (
-        <>
-          <td>{textFirstCell}</td>
-          <td>{textSecondCell}</td>
-        </>
+        textSecondCell ? (
+          <>
+            <td>{textFirstCell}</td>
+            <td>{textSecondCell}</td>
+          </>
+        ) : (
+          <td colSpan="2">{textFirstCell}</td>
+        )
       )}
     </tr>
   );
-};
+}
 
 CourseListRow.propTypes = {
   isHeader: PropTypes.bool,
   textFirstCell: PropTypes.string.isRequired,
-  textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-};
-
-CourseListRow.defaultProps = {
-  isHeader: false,
-  textSecondCell: null,
+  textSecondCell: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default CourseListRow;
