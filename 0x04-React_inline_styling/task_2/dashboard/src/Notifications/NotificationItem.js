@@ -1,5 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { StyleSheet, css } from 'aphrodite';
+
+const styles = StyleSheet.create({
+  default: {
+    color: 'blue',
+  },
+  urgent: {
+    color: 'red',
+  },
+});
 
 // Wrap the component in React.memo to make it a pure component
 const NotificationItem = React.memo(({ type = 'default', html, value, markAsRead, id }) => {
@@ -9,12 +19,15 @@ const NotificationItem = React.memo(({ type = 'default', html, value, markAsRead
     }
   };
 
+  const itemStyle = type === 'urgent' ? styles.urgent : styles.default;
+
   if (html) {
     return (
       <li
         data-notification-type={type}
         dangerouslySetInnerHTML={html}
         onClick={handleClick}
+        className={css(itemStyle)}
       ></li>
     );
   }
@@ -22,6 +35,7 @@ const NotificationItem = React.memo(({ type = 'default', html, value, markAsRead
     <li
       data-notification-type={type}
       onClick={handleClick}
+      className={css(itemStyle)}
     >
       {value}
     </li>

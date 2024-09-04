@@ -22,7 +22,6 @@ test('renders NotificationItem with correct html content', () => {
   expect(listItem).toContainHTML('<u>test</u>');
 });
 
-
 describe('NotificationItem Component', () => {
   it('should call markAsRead with the correct ID when clicked', () => {
     const markAsReadSpy = jest.fn(); // Create a spy function
@@ -40,5 +39,17 @@ describe('NotificationItem Component', () => {
 
     // Check if the spy function was called with the correct ID
     expect(markAsReadSpy).toHaveBeenCalledWith(1);
+  });
+
+  it('applies the correct style for default type', () => {
+    render(<NotificationItem type="default" value="test" />);
+    const listItem = screen.getByText('test');
+    expect(listItem).toHaveStyle('color: blue');
+  });
+
+  it('applies the correct style for urgent type', () => {
+    render(<NotificationItem type="urgent" value="test" />);
+    const listItem = screen.getByText('test');
+    expect(listItem).toHaveStyle('color: red');
   });
 });
