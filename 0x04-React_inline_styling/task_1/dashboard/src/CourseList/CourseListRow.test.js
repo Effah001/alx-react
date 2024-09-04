@@ -10,7 +10,7 @@ describe('CourseListRow Component', () => {
     render(<CourseListRow isHeader={true} textFirstCell="Course" />);
     
     const cell = screen.getByText('Course');
-    expect(cell).toBeInTheDocument();
+    expect(cell.tagName).toBe('TH');
     expect(cell).toHaveAttribute('colspan', '2');
   });
 
@@ -20,8 +20,6 @@ describe('CourseListRow Component', () => {
     
     const firstCell = screen.getByText('Course');
     const secondCell = screen.getByText('Credit');
-    expect(firstCell).toBeInTheDocument();
-    expect(secondCell).toBeInTheDocument();
     expect(firstCell.tagName).toBe('TH');
     expect(secondCell.tagName).toBe('TH');
   });
@@ -32,8 +30,6 @@ describe('CourseListRow Component', () => {
     
     const firstCell = screen.getByText('Course');
     const secondCell = screen.getByText('Credit');
-    expect(firstCell).toBeInTheDocument();
-    expect(secondCell).toBeInTheDocument();
     expect(firstCell.tagName).toBe('TD');
     expect(secondCell.tagName).toBe('TD');
   });
@@ -42,8 +38,8 @@ describe('CourseListRow Component', () => {
   test('applies correct style for header row', () => {
     render(<CourseListRow isHeader={true} textFirstCell="Course" />);
     
-    const cell = screen.getByText('Course');
-    expect(cell).toHaveStyle('background-color: #f5f5f5ab');
+    const row = screen.getByRole('row');
+    expect(row).toHaveStyle('background-color: #deb5b545');
   });
 
   // Test 5: Applies correct style for non-header row
@@ -51,7 +47,7 @@ describe('CourseListRow Component', () => {
     render(<CourseListRow isHeader={false} textFirstCell="Course" textSecondCell="Credit" />);
     
     const row = screen.getByRole('row');
-    expect(row).toHaveStyle('background-color: #f5f5f5');
+    expect(row).toHaveStyle('background-color: #f5f5f5ab');
   });
 
 });

@@ -3,6 +3,16 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'; // For the extended matchers like toBeInTheDocument
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+
+beforeAll(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterAll(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 jest.mock('../BodySection/BodySection', () => (props) => (
   <div data-testid="body-section">

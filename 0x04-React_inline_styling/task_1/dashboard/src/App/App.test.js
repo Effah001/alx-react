@@ -2,6 +2,16 @@ import React from 'react';
 import { render, screen, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+
+beforeAll(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterAll(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 jest.mock('../Notifications/Notifications', () => () => <div>Mock Notifications</div>);
 jest.mock('../Header/Header', () => () => <div>Mock Header</div>);
