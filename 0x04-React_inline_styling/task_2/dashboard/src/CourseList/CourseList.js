@@ -12,7 +12,7 @@ const style = StyleSheet.create({
   },
 })
 
-const CourseList = ({ listCourses }) => {
+function CourseList({ listCourses = [] }) {
   return (
     <table id="CourseList" className={css(style.courseList)}>
       <thead>
@@ -40,8 +40,7 @@ CourseList.propTypes = {
   listCourses: PropTypes.arrayOf(CourseShape),
 };
 
-CourseList.defaultProps = {
-  listCourses: [],
-};
+// Remove this:
+// CourseList.defaultProps = { listCourses: [] };
 
 export default CourseList;

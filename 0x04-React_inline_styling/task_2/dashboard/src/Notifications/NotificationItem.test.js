@@ -1,7 +1,15 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import NotificationItem from './NotificationItem';
-import PropTypes from 'prop-types';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+beforeAll(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterAll(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 test('renders NotificationItem component without crashing', () => {
   render(<NotificationItem type="default" value="test" />);
@@ -24,8 +32,8 @@ test('renders NotificationItem with correct html content', () => {
 
 describe('NotificationItem Component', () => {
   it('should call markAsRead with the correct ID when clicked', () => {
-    const markAsReadSpy = jest.fn(); // Create a spy function
-    const { getByText } = render(
+    const markAsReadSpy = jest.fn();
+    render(
       <NotificationItem
         type="default"
         value="Test Notification"
@@ -34,22 +42,20 @@ describe('NotificationItem Component', () => {
       />
     );
 
-    // Simulate a click event on the list item
-    fireEvent.click(getByText('Test Notification'));
+    fireEvent.click(screen.getByText('Test Notification'));
 
-    // Check if the spy function was called with the correct ID
     expect(markAsReadSpy).toHaveBeenCalledWith(1);
   });
 
-  it('applies the correct style for default type', () => {
+  it('applies the correct class for default type', () => {
     render(<NotificationItem type="default" value="test" />);
     const listItem = screen.getByText('test');
-    expect(listItem).toHaveStyle('color: blue');
+    expect(listItem.className).toMatch(/default/);
   });
 
-  it('applies the correct style for urgent type', () => {
+  it('applies the correct class for urgent type', () => {
     render(<NotificationItem type="urgent" value="test" />);
     const listItem = screen.getByText('test');
-    expect(listItem).toHaveStyle('color: red');
+    expect(listItem.className).toMatch(/urgent/);
   });
 });

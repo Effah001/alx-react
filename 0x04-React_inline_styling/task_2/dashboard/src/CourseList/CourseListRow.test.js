@@ -1,55 +1,95 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CourseListRow from './CourseListRow';
+import { StyleSheetTestUtils } from 'aphrodite';
 
-
-describe('CourseListRow Component', () => {
-
-  // Test 1: When isHeader is true and textSecondCell is not provided
-  test('renders one cell with colspan = 2 when isHeader is true and textSecondCell is not provided', () => {
-    render(<CourseListRow isHeader={true} textFirstCell="Course" />);
-    
-    const cell = screen.getByText('Course');
-    expect(cell).toBeInTheDocument();
-    expect(cell).toHaveAttribute('colspan', '2');
+describe('CourseListRow', () => {
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
   });
 
-  // Test 2: When isHeader is true and textSecondCell is provided
-  test('renders two cells when isHeader is true and textSecondCell is provided', () => {
-    render(<CourseListRow isHeader={true} textFirstCell="Course" textSecondCell="Credit" />);
-    
-    const firstCell = screen.getByText('Course');
-    const secondCell = screen.getByText('Credit');
-    expect(firstCell).toBeInTheDocument();
-    expect(secondCell).toBeInTheDocument();
-    expect(firstCell.tagName).toBe('TH');
-    expect(secondCell.tagName).toBe('TH');
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
-  // Test 3: When isHeader is false
-  test('renders two td elements within a tr element when isHeader is false', () => {
-    render(<CourseListRow isHeader={false} textFirstCell="Course" textSecondCell="Credit" />);
-    
-    const firstCell = screen.getByText('Course');
-    const secondCell = screen.getByText('Credit');
-    expect(firstCell).toBeInTheDocument();
-    expect(secondCell).toBeInTheDocument();
-    expect(firstCell.tagName).toBe('TD');
-    expect(secondCell.tagName).toBe('TD');
+  const testCases = [
+    {
+      props: { isHeader: true, textFirstCell: 'Header', textSecondCell: null },
+      expected: { cellCount: 1, colspan: '2' }
+    },
+    {
+      props: { isHeader: true, textFirstCell: 'Header 1', textSecondCell: 'Header 2' },
+      expected: { cellCount: 2, colspan: undefined }
+    },
+    {
+      props: { isHeader: false, textFirstCell: 'Data 1', textSecondCell: 'Data 2' },
+      expected: { cellCount: 2, colspan: undefined }
+    }
+  ];
+
+  test.each(testCases)('renders correctly with props: %o', ({ props, expected }) => {
+    render(<CourseListRow {...props} />);
+
+    const row = screen.getByRole('row');
+    const cells = row.children;
+
+    expect(cells).toHaveLength(expected.cellCount);
+
+    if (expected.cellCount === 1) {
+      expect(cells[0]).toHaveAttribute('colspan', expected.colspan);
+      expect(cells[0]).toHaveTextContent(props.textFirstCell);
+    } else {
+      expect(cells[0]).toHaveTextContent(props.textFirstCell);
+      expect(cells[1]).toHaveTextContent(props.textSecondCell);
+    }
+
+    // Check for the presence of Aphrodite-generated classes
+    expect(row.className).toMatch(/headerRow|defaultRow/);
   });
 
-// Test 5: Applies inline style correctly
-test('applies inline style correctly', () => {
-  render(
-    <table>
-      <tbody>
-        <CourseListRow isHeader={false} textFirstCell="Course" style={{ backgroundColor: 'rgba(222, 181, 181, 0.271)' }} />
-      </tbody>
-    </table>
-  );
+  test('applies the correct background color', () => {
+    const { rerender } = render(<CourseListRow isHeader={true} textFirstCell="Header" />);
+    expect(screen.getByRole('row').className).toMatch(/headerRow/);
 
-  const row = screen.getByRole('row');
-  expect(row).toHaveStyle('background-color: rgba(245, 245, 245, 0.671)');
-});
+    rerender(<CourseListRow isHeader={false} textFirstCell="Data" textSecondCell="More Data" />);
+    expect(screen.getByRole('row').className).toMatch(/defaultRow/);
+  });
 
+  it('renders correctly with props: isHeader=true, textFirstCell="Header 1", textSecondCell="Header 2"', () => {
+    const { container } = render(
+      <CourseListRow
+        isHeader={true}
+        textFirstCell="Header 1"
+        textSecondCell="Header 2"
+      />
+    );
+
+    const row = container.querySelector('tr');
+    expect(row).not.toBeNull();
+
+    const cells = row.querySelectorAll('th');
+    expect(cells).toHaveLength(2);
+
+    expect(cells[0].textContent).toBe('Header 1');
+    expect(cells[1].textContent).toBe('Header 2');
+  });
+
+  it('renders correctly with props: isHeader=false, textFirstCell="Data 1", textSecondCell="Data 2"', () => {
+    const { container } = render(
+      <CourseListRow
+        isHeader={false}
+        textFirstCell="Data 1"
+        textSecondCell="Data 2"
+      />
+    );
+
+    const row = container.querySelector('tr');
+    expect(row).not.toBeNull();
+
+    const cells = row.querySelectorAll('td');
+    expect(cells).toHaveLength(2);
+
+    expect(cells[0].textContent).toBe('Data 1');
+    expect(cells[1].textContent).toBe('Data 2');
+  });
 });
