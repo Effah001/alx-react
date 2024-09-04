@@ -38,18 +38,20 @@ describe('CourseListRow Component', () => {
     expect(secondCell.tagName).toBe('TD');
   });
 
-// Test 5: Applies inline style correctly
-test('applies inline style correctly', () => {
-  render(
-    <table>
-      <tbody>
-        <CourseListRow isHeader={false} textFirstCell="Course" style={{ backgroundColor: 'rgba(222, 181, 181, 0.271)' }} />
-      </tbody>
-    </table>
-  );
+  // Test 4: Applies correct style for header row
+  test('applies correct style for header row', () => {
+    render(<CourseListRow isHeader={true} textFirstCell="Course" />);
+    
+    const cell = screen.getByText('Course');
+    expect(cell).toHaveStyle('background-color: #f5f5f5ab');
+  });
 
-  const row = screen.getByRole('row');
-  expect(row).toHaveStyle('background-color: rgba(245, 245, 245, 0.671)');
-});
+  // Test 5: Applies correct style for non-header row
+  test('applies correct style for non-header row', () => {
+    render(<CourseListRow isHeader={false} textFirstCell="Course" textSecondCell="Credit" />);
+    
+    const row = screen.getByRole('row');
+    expect(row).toHaveStyle('background-color: #f5f5f5');
+  });
 
 });
