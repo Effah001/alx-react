@@ -2,17 +2,11 @@
 node_modules/
 
 # npm package files
-package.json
 package-lock.json
 
 # Setup script
 nodesource_setup.sh
 
-# JavaScript configuration
-jsconfig.json
-
-# Babel configuration (corrected typo)
-babel.config.js
 
 # Optional: Ignore build output
 /build/
