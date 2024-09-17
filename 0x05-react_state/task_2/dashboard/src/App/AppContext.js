@@ -17,7 +17,6 @@ export const AppProvider = ({ children }) => {
     const [user, setUser] = useState(defaultUser);
 
     const logIn = (email, password) => {
-        console.log('Logging in with:', email, password); // Debugging log
         setUser({ ...defaultUser, email, password, isLoggedIn: true });
     };
 
