@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { AppContext } from '../App/AppContext'; // Import AppContext
 
 const styles = StyleSheet.create({
   appBody: {
@@ -49,7 +50,8 @@ const styles = StyleSheet.create({
   }
 });
 
-function Login({ logIn }) {
+function Login() {
+  const { logIn } = useContext(AppContext); // Use context to get logIn function
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [enableSubmit, setEnableSubmit] = useState(false);
@@ -57,7 +59,7 @@ function Login({ logIn }) {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     if (enableSubmit) {
-      logIn();
+      logIn(email, password); // Pass email and password to logIn
     }
   }
 
@@ -77,41 +79,41 @@ function Login({ logIn }) {
     setEnableSubmit(emailValue.length > 0 && passwordValue.length > 0);
   }
 
-    return (
-        <div className={css(styles.appBody)}>
-            <p>Login to access the full dashboard</p>
-            <form onSubmit={handleLoginSubmit} className={css(styles.form)}>
-                <div className={css(styles.inputGroup)}>
-                    <label htmlFor="Email" className={css(styles.label)}>Email:</label>
-                    <input 
-                      type="text" 
-                      id="Email" 
-                      name="Email" 
-                      value={email} 
-                      onChange={handleChangeEmail}
-                      className={css(styles.input)} 
-                    />
-                </div>
-                <div className={css(styles.inputGroup)}>
-                    <label htmlFor="password" className={css(styles.label)}>Password:</label>
-                    <input 
-                      type="password" 
-                      id="password" 
-                      name="password" 
-                      value={password} 
-                      onChange={handleChangePassword}
-                      className={css(styles.input)} 
-                    />
-                </div>
-                <input 
-                  type="submit" 
-                  value="OK" 
-                  className={css(styles.button)} 
-                  disabled={!enableSubmit}
-                />
-            </form>
+  return (
+    <div className={css(styles.appBody)}>
+      <p>Login to access the full dashboard</p>
+      <form onSubmit={handleLoginSubmit} className={css(styles.form)}>
+        <div className={css(styles.inputGroup)}>
+          <label htmlFor="Email" className={css(styles.label)}>Email:</label>
+          <input 
+            type="text" 
+            id="Email" 
+            name="Email" 
+            value={email} 
+            onChange={handleChangeEmail}
+            className={css(styles.input)} 
+          />
         </div>
-    );
+        <div className={css(styles.inputGroup)}>
+          <label htmlFor="password" className={css(styles.label)}>Password:</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            value={password} 
+            onChange={handleChangePassword}
+            className={css(styles.input)} 
+          />
+        </div>
+        <input 
+          type="submit" 
+          value="OK" 
+          className={css(styles.button)} 
+          disabled={!enableSubmit}
+        />
+      </form>
+    </div>
+  );
 }
 
 export default Login;
