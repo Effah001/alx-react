@@ -34,14 +34,6 @@ class Header extends Component {
   render() {
     const { user, logOut } = this.context;
 
-    // Check if user is defined and log the user object
-    console.log('User object:', user); // Added logging for user object
-
-    // Check if user.email is defined
-    if (!user || !user.email) {
-      console.warn('User email is undefined'); // Warning if email is not available
-    }
-
     return (
       <header className={css(styles.header, user.isLoggedIn && styles.column)}>
         <img src={HolbertonLogo} className={css(styles.appLogo)} alt="logo" />
