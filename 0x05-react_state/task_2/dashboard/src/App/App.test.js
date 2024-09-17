@@ -29,17 +29,24 @@ test('renders App component with correct elements', async () => {
 });
 
 describe('App Component', () => {
-  it('should call logOut and display an alert when Ctrl + h is pressed', () => {
-    const mockLogOut = jest.fn();
+  it('should call logOut and display an alert when Ctrl + h is pressed', async () => {
+    await act(async () => {
+      render(<App />);
+    });
+
+    // Mock the logOut function
+    const mockLogOut = jest.spyOn(App.prototype, 'logOut');
     const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
 
-    render(<App logOut={mockLogOut} />);
+    // Simulate Ctrl + h keydown
+    fireEvent.keyDown(window, { ctrlKey: true, key: 'h' });
 
-    fireEvent.keyDown(document, { key: 'h', ctrlKey: true });
-
+    // Check if logOut was called
     expect(mockLogOut).toHaveBeenCalled();
     expect(alertMock).toHaveBeenCalledWith('Logging you out');
 
+    // Clean up mocks
+    mockLogOut.mockRestore();
     alertMock.mockRestore();
   });
 

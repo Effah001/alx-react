@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
@@ -10,6 +9,7 @@ import { getLatestNotification } from '../utils';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import { defaultUser } from './AppContext';
+import { AppContext } from './AppContext';
 
 // Define styles using Aphrodite
 const styles = StyleSheet.create({
@@ -74,7 +74,7 @@ class App extends Component {
     this.setState({ displayDrawer: false });
   }
 
-  logOut = () => {
+  logOut() {
     this.setState({
       user: {
         email: '',
@@ -93,36 +93,37 @@ class App extends Component {
   }
 
   render() {
-    const { listCourses, listNotifications, user } = this.state;
-    const { displayDrawer } = this.state;
+    const { listCourses, listNotifications, user, displayDrawer } = this.state;
 
     return (
-      <>
-        <Notifications 
-          listNotifications={listNotifications}
-          displayDrawer={displayDrawer}
-          handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer}
-        />
-        <div className={css(styles.app)}>
-          <Header />
-          <div className='App-body'>
-            {user.isLoggedIn ? (
-              <BodySectionWithMarginBottom title="Course list">
-                <CourseList listCourses={listCourses} />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login logIn={this.logIn} />
-              </BodySectionWithMarginBottom>
-            )}
-            <BodySection title="News from the School">
-              <p>Here is some random news from the school. Stay tuned for more updates!</p>
-            </BodySection>
-          </div>
+      <AppContext.Provider value={{ user, logIn: this.logIn, logOut: this.logOut }}> 
+        <>
+          <Notifications 
+            listNotifications={listNotifications}
+            displayDrawer={displayDrawer}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+          />
+          <div className={css(styles.app)}>
+            <Header />
+            <div className='App-body'>
+              {user.isLoggedIn ? (
+                <BodySectionWithMarginBottom title="Course list">
+                  <CourseList listCourses={listCourses} />
+                </BodySectionWithMarginBottom>
+              ) : (
+                <BodySectionWithMarginBottom title="Log in to continue">
+                  <Login logIn={this.logIn} />
+                </BodySectionWithMarginBottom>
+              )}
+              <BodySection title="News from the School">
+                <p>Here is some random news from the school. Stay tuned for more updates!</p>
+              </BodySection>
+            </div>
             <Footer />
-        </div>
-      </>
+          </div>
+        </>
+      </AppContext.Provider>
     );
   }
 }
