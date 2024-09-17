@@ -49,8 +49,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function Login() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Login({ logIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [enableSubmit, setEnableSubmit] = useState(false);
@@ -58,8 +57,7 @@ function Login() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     if (enableSubmit) {
-      setIsLoggedIn(true);
-
+      logIn();
     }
   }
 

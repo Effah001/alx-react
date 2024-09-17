@@ -93,7 +93,7 @@ class App extends Component {
   }
 
   render() {
-    const { listCourses, listNotifications } = this.state;
+    const { listCourses, listNotifications, user } = this.state;
     const { displayDrawer } = this.state;
 
     return (
@@ -107,7 +107,7 @@ class App extends Component {
         <div className={css(styles.app)}>
           <Header />
           <div className='App-body'>
-            {this.state.user.isLoggedIn ? (
+            {user.isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
                 <CourseList listCourses={listCourses} />
               </BodySectionWithMarginBottom>
