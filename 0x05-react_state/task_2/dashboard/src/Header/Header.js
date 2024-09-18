@@ -34,6 +34,9 @@ class Header extends Component {
   render() {
     const { user, logOut } = this.context;
 
+    // Debugging: Log the user object
+    console.log('User object:', user);
+
     return (
       <header className={css(styles.header, user.isLoggedIn && styles.column)}>
         <img src={HolbertonLogo} className={css(styles.appLogo)} alt="logo" />
