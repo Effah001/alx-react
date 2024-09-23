@@ -35,19 +35,3 @@ export const loginSuccess = () => ({
 export const loginFailure = () => ({
     type: LOGIN_FAILURE
 })
-
-
-export const loginRequest = (email, password) => {
-    return (dispatch) => {
-        dispatch(login(email, password));
-
-        fetch('/login-success.json')
-        .then((response) => response.json())
-        .then((data) => {
-            dispatch(loginSuccess());
-        })
-        .catch((error) => {
-            dispatch(loginFailure());
-        });
-    };
-};

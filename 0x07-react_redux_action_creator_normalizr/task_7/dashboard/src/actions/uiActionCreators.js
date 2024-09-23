@@ -24,3 +24,18 @@ export const hideNotificationDrawer = () => ({
 });
 
 export const boundHideNotificationDrawer = () => hideNotificationDrawer();
+
+export const loginRequest = (email, password) => {
+    return (dispatch) => {
+        dispatch(login(email, password));
+
+        fetch('/login-success.json')
+        .then((response) => response.json())
+        .then((data) => {
+            dispatch(loginSuccess());
+        })
+        .catch((error) => {
+            dispatch(loginFailure());
+        });
+    };
+};
