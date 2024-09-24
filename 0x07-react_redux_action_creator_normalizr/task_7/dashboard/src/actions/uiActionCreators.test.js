@@ -1,8 +1,8 @@
-import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER } from "./uiActionTypes";
-import { login, logout, displayNotificationDrawer, hideNotificationDrawer, loginSuccess, loginRequest, loginFailure } from "./uiActionCreators";
+import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER } from './uiActionTypes';
+import { login, logout, displayNotificationDrawer, hideNotificationDrawer, loginSuccess, loginFailure, loginRequest } from './uiActionCreators';
 import fetchMock from 'fetch-mock';
 import thunk from 'redux-thunk';
-import configureMockStore from 'redux-mock-store';;
+import configureMockStore from 'redux-mock-store';
 
 describe('uiActionCreators', () => {
   it('should create an action to login with email and password', () => {
@@ -40,7 +40,6 @@ describe('uiActionCreators', () => {
     expect(hideNotificationDrawer()).toEqual(expectedAction);
   });
 });
-
 
 describe('Test loginRequset action', () => {
   beforeEach(() => {
