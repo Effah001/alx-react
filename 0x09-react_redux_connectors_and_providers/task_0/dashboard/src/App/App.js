@@ -116,8 +116,11 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: state.ui.isLoggedIn,
+  isLoggedIn: state.get('isUserLoggedIn'),
 });
+
+
+export { mapStateToProps };
 
 
 export default connect(mapStateToProps, { boundLogout })(App);

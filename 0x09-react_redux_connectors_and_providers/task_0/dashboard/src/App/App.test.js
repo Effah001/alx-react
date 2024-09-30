@@ -2,6 +2,8 @@ import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import App from './App';
 import { StyleSheetTestUtils } from 'aphrodite';
+import { fromJS } from 'immutable';
+import { mapStateToProps } from './App';
 
 jest.mock('../utils', () => ({
   getFullYear: () => 2023,
@@ -79,5 +81,20 @@ describe('App Component', () => {
     
     expect(screen.queryByTestId('notifications-div')).not.toBeInTheDocument();
     expect(screen.getByText('Your notifications')).toBeInTheDocument();
+  });
+});
+
+
+describe('mapStateToProps', () => {
+  it('should return the right object when passing the state', () => {
+    let state = fromJS({
+      isNotificationDrawerVisible: false,
+      isUserLoggedIn: true,
+      user: {}
+    });
+
+    const expected = { isLoggedIn: true };
+    const result = mapStateToProps(state);
+    expect(result).toEqual(expected);
   });
 });
